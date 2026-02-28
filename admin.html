@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - TechAssist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-dark bg-dark mb-5">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">⚙️ TechAssist - Painel de Controle Interno</span>
+            <a href="index.html" class="btn btn-outline-light btn-sm">Voltar ao Site</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="mb-4">Gestão de Chamados Abertos</h2>
+        
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-0 table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Data</th>
+                            <th>Cliente</th>
+                            <th>Equipamento</th>
+                            <th>Problema Relatado</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaChamados">
+                        <tr>
+                            <td colspan="5" class="text-center py-4 text-muted">A conectar com o banco de dados e procurar chamados... ⏳</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        // 1. IMPORTANDO O SEGURANÇA (Auth e onAuthStateChanged)
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD1M0lzF2IgXYZttiyzJib9wTZgyw3Mzv4",
+            authDomain: "techassist-4ea7f.firebaseapp.com",
+            projectId: "techassist-4ea7f",
+            storageBucket: "techassist-4ea7f.firebasestorage.app",
+            messagingSenderId: "612558349071",
+            appId: "1:612558349071:web:f645ae8537162cf51d547a"
+        };
+        // -------------------------------------------
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app); // Ligando o motor de verificação de usuários
+
+        // 👑 DEFINA QUEM É O CHEFE AQUI
+        const EMAIL_ADMIN = "gabrieldietrich98@gmail.com";
+
+        // Oculta a tabela temporariamente para o invasor não ver nada antes de ser expulso
+        document.getElementById("tabelaChamados").innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">Verificando credenciais de segurança... 🛡️</td></tr>`;
+
+        // 2. O FEITIÇO DE PROTEÇÃO (Route Guard)
+        onAuthStateChanged(auth, (user) => {
+            if (user && user.email === EMAIL_ADMIN) {
+                // SUCESSO! É o dono do sistema. Libera o carregamento dos chamados.
+                carregarChamados();
+            } else {
+                // INVASOR! Não está logado ou é apenas um cliente.
+                alert("⛔ Acesso Negado! Esta área é restrita para a equipe TechAssist.");
+                window.location.href = "index.html"; // Chuta de volta para a Home
+            }
+        });
+
+        // 3. Função que busca os dados (só roda se o segurança liberar)
+        async function carregarChamados() {
+            try {
+                const respostaBanco = await getDocs(collection(db, "chamados"));
+                const corpoTabela = document.getElementById("tabelaChamados");
+                corpoTabela.innerHTML = ""; 
+
+                if (respostaBanco.empty) {
+                    corpoTabela.innerHTML = `<tr><td colspan="5" class="text-center py-4">Nenhum chamado aberto no momento.</td></tr>`;
+                    return;
+                }
+
+                respostaBanco.forEach((documento) => {
+                    const chamado = documento.data(); 
+                    const linha = document.createElement("tr");
+                    linha.innerHTML = `
+                        <td><small class="text-muted">${chamado.data_envio || "Sem data"}</small></td>
+                        <td class="fw-bold">${chamado.nome}<br><small class="text-muted fw-normal">${chamado.email}</small></td>
+                        <td>${chamado.equipamento}</td>
+                        <td>${chamado.problema}</td>
+                        <td><span class="badge bg-warning text-dark">${chamado.status}</span></td>
+                    `;
+                    corpoTabela.appendChild(linha); 
+                });
+
+            } catch (erro) {
+                console.error("Erro ao buscar dados:", erro);
+                document.getElementById("tabelaChamados").innerHTML = `<tr><td colspan="5" class="text-center text-danger py-4">Erro ao carregar dados. Verifique a conexão.</td></tr>`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -27,70 +27,85 @@
 
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <form onsubmit="enviarParaWhatsApp(event)">
-                            
-                            <h5 class="mb-3 text-primary border-bottom pb-2">1. Seus Dados</h5>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="nome" class="form-label">Nome Completo</label>
-                                    <input type="text" class="form-control" id="nome" required placeholder="Ex: João Silva">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="whatsapp" class="form-label">WhatsApp</label>
-                                    <input type="tel" class="form-control" id="whatsapp" required placeholder="(00) 00000-0000">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label for="email" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="email" required placeholder="joao@email.com">
-                            </div>
-
-                            <h5 class="mb-3 text-primary border-bottom pb-2">2. Sobre o Equipamento</h5>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="tipoEquipamento" class="form-label">Tipo de Aparelho</label>
-                                    <select class="form-select" id="tipoEquipamento" required>
-                                        <option value="" selected disabled>Selecione...</option>
-                                        <option value="notebook">Notebook</option>
-                                        <option value="desktop">Computador de Mesa (Desktop)</option>
-                                        <option value="periferico">Periférico (Monitor, Teclado, etc)</option>
-                                        <option value="rede">Problema de Rede/Roteador</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="marcaModelo" class="form-label">Marca e Modelo</label>
-                                    <input type="text" class="form-control" id="marcaModelo" placeholder="Ex: Acer Nitro 5, Dell Inspiron...">
-                                </div>
-                            </div>
-
-                            <h5 class="mb-3 text-primary border-bottom pb-2">3. Detalhes da Falha</h5>
-                            <div class="mb-3">
-                                <label for="descricao" class="form-label">Descreva o que está acontecendo</label>
-                                <textarea class="form-control" id="descricao" rows="4" required placeholder="Ex: O computador liga, mas a tela fica preta. Começou depois de uma atualização."></textarea>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label">Nível de Urgência</label>
-                                <div class="d-flex gap-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="urgencia" id="urgenciaBaixa" value="baixa" checked>
-                                        <label class="form-check-label" for="urgenciaBaixa">Baixa (Posso esperar)</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="urgencia" id="urgenciaAlta" value="alta">
-                                        <label class="form-check-label text-danger" for="urgenciaAlta">Alta (Máquina de trabalho parada)</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg">Enviar Solicitação de Suporte</button>
-                            </div>
-
-                        </form>
-                    </div>
+                <div class="card shadow-sm border-0 border-top border-primary border-4 mb-5">
+        <div class="card-body p-4">
+            <form id="formChamado">
+                <div class="mb-3">
+                    <label for="nome" class="form-label fw-bold">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome" required>
                 </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold">E-mail de Contacto</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="equipamento" class="form-label fw-bold">Equipamento</label>
+                    <input type="text" class="form-control" id="equipamento" placeholder="Ex: Portátil Acer Nitro 5" required>
+                </div>
+                <div class="mb-3">
+                    <label for="problema" class="form-label fw-bold">Descrição do Problema (Cole o Laudo da IA aqui)</label>
+                    <textarea class="form-control" id="problema" rows="4" required></textarea>
+                </div>
+                <button type="submit" id="btnEnviar" class="btn btn-primary w-100 fw-bold py-2">Abrir Chamado na Nuvem ☁️</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        // 1. Importar as ferramentas do Firebase (Direto dos servidores do Google)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD1M0lzF2IgXYZttiyzJib9wTZgyw3Mzv4",
+            authDomain: "techassist-4ea7f.firebaseapp.com",
+            projectId: "techassist-4ea7f",
+            storageBucket: "techassist-4ea7f.firebasestorage.app",
+            messagingSenderId: "612558349071",
+            appId: "1:612558349071:web:f645ae8537162cf51d547a"
+        };
+
+        // 3. Ligar o motor do banco de dados
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 4. Lógica para capturar o clique no botão "Enviar"
+        document.getElementById("formChamado").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Impede o ecrã de piscar e recarregar a página
+
+            const btn = document.getElementById("btnEnviar");
+            btn.innerHTML = "A enviar os dados de forma segura... ⏳";
+            btn.disabled = true;
+
+            try {
+                // Vai buscar o que o cliente escreveu nas caixas de texto
+                const nome = document.getElementById("nome").value;
+                const email = document.getElementById("email").value;
+                const equipamento = document.getElementById("equipamento").value;
+                const problema = document.getElementById("problema").value;
+
+                // Envia as informações para uma "gaveta" chamada "chamados" no Firebase
+                const docRef = await addDoc(collection(db, "chamados"), {
+                    nome: nome,
+                    email: email,
+                    equipamento: equipamento,
+                    problema: problema,
+                    data_envio: new Date().toLocaleString("pt-PT"),
+                    status: "Pendente"
+                });
+
+                alert("✅ Sucesso! O seu chamado foi registado. Número do bilhete: " + docRef.id);
+                document.getElementById("formChamado").reset(); // Limpa o formulário
+
+            } catch (erro) {
+                console.error("Erro ao gravar:", erro);
+                alert("❌ Não foi possível abrir o chamado. Tente novamente.");
+            } finally {
+                btn.innerHTML = "Abrir Chamado na Nuvem ☁️";
+                btn.disabled = false;
+            }
+        });
+    </script>
             </div>
         </div>
     </div>

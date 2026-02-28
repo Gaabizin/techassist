@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechAssist - Abrir Chamado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">TechAssist</a>
+            <a href="index.html" class="btn btn-outline-light btn-sm">Voltar para Home</a>
+        </div>
+    </nav>
+
+    <header class="page-header header-form text-center">
+        <div class="container">
+            <h1 class="display-5 fw-bold">Abrir Chamado Técnico</h1>
+            <p class="lead">Preencha os dados abaixo com o máximo de detalhes para agilizarmos o seu diagnóstico.</p>
+        </div>
+    </header>
+
+    <div class="container mt-5">
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <form onsubmit="enviarParaWhatsApp(event)">
+                            
+                            <h5 class="mb-3 text-primary border-bottom pb-2">1. Seus Dados</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="nome" class="form-label">Nome Completo</label>
+                                    <input type="text" class="form-control" id="nome" required placeholder="Ex: João Silva">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="whatsapp" class="form-label">WhatsApp</label>
+                                    <input type="tel" class="form-control" id="whatsapp" required placeholder="(00) 00000-0000">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" required placeholder="joao@email.com">
+                            </div>
+
+                            <h5 class="mb-3 text-primary border-bottom pb-2">2. Sobre o Equipamento</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="tipoEquipamento" class="form-label">Tipo de Aparelho</label>
+                                    <select class="form-select" id="tipoEquipamento" required>
+                                        <option value="" selected disabled>Selecione...</option>
+                                        <option value="notebook">Notebook</option>
+                                        <option value="desktop">Computador de Mesa (Desktop)</option>
+                                        <option value="periferico">Periférico (Monitor, Teclado, etc)</option>
+                                        <option value="rede">Problema de Rede/Roteador</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="marcaModelo" class="form-label">Marca e Modelo</label>
+                                    <input type="text" class="form-control" id="marcaModelo" placeholder="Ex: Acer Nitro 5, Dell Inspiron...">
+                                </div>
+                            </div>
+
+                            <h5 class="mb-3 text-primary border-bottom pb-2">3. Detalhes da Falha</h5>
+                            <div class="mb-3">
+                                <label for="descricao" class="form-label">Descreva o que está acontecendo</label>
+                                <textarea class="form-control" id="descricao" rows="4" required placeholder="Ex: O computador liga, mas a tela fica preta. Começou depois de uma atualização."></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Nível de Urgência</label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="urgencia" id="urgenciaBaixa" value="baixa" checked>
+                                        <label class="form-check-label" for="urgenciaBaixa">Baixa (Posso esperar)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="urgencia" id="urgenciaAlta" value="alta">
+                                        <label class="form-check-label text-danger" for="urgenciaAlta">Alta (Máquina de trabalho parada)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Enviar Solicitação de Suporte</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0">&copy; 2026 TechAssist. Projeto Acadêmico.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function enviarParaWhatsApp(event) {
+            event.preventDefault(); // Evita que a página recarregue
+
+            // Pega os valores que o usuário digitou
+            const nome = document.getElementById('nome').value;
+            const equipamento = document.getElementById('tipoEquipamento').value;
+            const modelo = document.getElementById('marcaModelo').value;
+            const descricao = document.getElementById('descricao').value;
+            
+            // Pega a urgência
+            let urgencia = "Baixa";
+            if (document.getElementById('urgenciaAlta').checked) {
+                urgencia = "ALTA";
+            }
+
+            // Monta a mensagem com quebras de linha amigáveis para o WhatsApp
+            const textoMensagem = `*NOVO CHAMADO TÉCNICO* 🛠️%0A%0A*Cliente:* ${nome}%0A*Equipamento:* ${equipamento} - ${modelo}%0A*Urgência:* ${urgencia}%0A*Descrição do Problema:* ${descricao}`;
+
+            // INSIRA O SEU NÚMERO AQUI (com código do país 55 + DDD + número)
+            // Exemplo: 5511999999999
+            const numeroWhatsApp = "5551996368057"; 
+
+            // Cria o link do WhatsApp e abre em uma nova aba
+            const link = `https://wa.me/${numeroWhatsApp}?text=${textoMensagem}`;
+            window.open(link, '_blank');
+        }
+    </script>
+
+    <style>
+        .chatbot-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; font-size: 28px; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: transform 0.3s; }
+        .chatbot-btn:hover { transform: scale(1.1); }
+        .chatbot-window { display: none; position: fixed; bottom: 90px; right: 20px; width: 320px; background: white; border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden; border: 1px solid #dee2e6; }
+        .chatbot-header { background: #0d6efd; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .chatbot-close { cursor: pointer; font-size: 18px; background: none; border: none; color: white; }
+        .chatbot-body { padding: 20px; height: 220px; background: #f8f9fa; }
+        .chat-bubble { background: #e9ecef; padding: 10px 15px; border-radius: 15px 15px 15px 0; font-size: 14px; margin-bottom: 15px; color: #333; }
+    </style>
+
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <span>🎧 Suporte TechAssist</span>
+            <button class="chatbot-close" onclick="toggleChatbot()">✖</button>
+        </div>
+        <div class="chatbot-body">
+            <div class="chat-bubble">
+                Olá! Sou o agente virtual da TechAssist. Como posso te guiar hoje?
+            </div>
+            <a href="ia.html" class="btn btn-sm btn-outline-primary mb-2 w-100 text-start">🤖 Fazer um Diagnóstico por IA</a>
+            <a href="faq.html" class="btn btn-sm btn-outline-primary mb-2 w-100 text-start">❓ Ver Dúvidas Frequentes</a>
+            <a href="formulario.html" class="btn btn-sm btn-primary w-100 text-start">👨‍🔧 Falar com Atendente Humano</a>
+        </div>
+    </div>
+
+    <button class="btn btn-primary chatbot-btn" onclick="toggleChatbot()">💬</button>
+
+    <script>
+        function toggleChatbot() {
+            const chatWindow = document.getElementById("chatbotWindow");
+            if (chatWindow.style.display === "none" || chatWindow.style.display === "") {
+                chatWindow.style.display = "block";
+            } else {
+                chatWindow.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

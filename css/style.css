@@ -1,0 +1,116 @@
+/* css/style.css */
+
+/* Melhora a fonte geral do site */
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f9fc; /* Um cinza muito claro e moderno */
+}
+
+/* Efeito de flutuação nos Cards de Serviço (Home e Cibersegurança) */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px; /* Bordas mais arredondadas */
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Faz o card subir um pouco */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15) !important; /* Aumenta a sombra */
+    border-color: #0d6efd !important; /* Muda a cor da borda sutilmente */
+}
+
+/* Deixa os botões principais mais arredondados */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+/* Efeito ao passar o rato no botão primário */
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: scale(1.05); /* Dá uma leve "inchada" no botão */
+}
+
+/* Suaviza as caixas de texto do formulário e do chat */
+.form-control {
+    border-radius: 8px;
+    padding: 12px;
+}
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* Configuração do fundo da página inicial */
+.hero-section {
+    /* O linear-gradient coloca uma camada escura por cima da imagem para o texto branco ficar legível */
+    background-image: linear-gradient(rgba(10, 10, 10, 0.8), rgba(33, 37, 41, 0.9)), url('../img/fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    padding: 100px 0;
+    border-bottom: 3px solid #0d6efd; /* Uma linha azul para dar estilo */
+}
+
+/* --- Novas classes para bordas coloridas no topo dos cartões da Home --- */
+
+/* Estilo geral para todos os cartões que terão faixas */
+.card-listado {
+    border-top-style: solid;
+    border-top-width: 4px; /* Espessura da faixa */
+}
+
+/* Cor roxa para o cartão de Suporte Técnico (ferramentas) */
+.border-tech-support {
+    border-top-color: #6f42c1;
+}
+
+/* Cor magenta para o cartão de Laudos por IA (robô) */
+.border-ia-reports {
+    border-top-color: #d63384;
+}
+
+/* Cor azul para o cartão de Cibersegurança (escudo) */
+.border-cybersecurity {
+    border-top-color: #007bff;
+}
+
+/* Base padrão para todos os cabeçalhos */
+.page-header {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white !important;
+    padding: 80px 0;
+    text-align: center;
+    border-bottom: 4px solid #0d6efd;
+    margin-bottom: 40px;
+}
+
+/* O texto dentro do cabeçalho precisa ficar branco para dar contraste */
+.page-header h1, .page-header p {
+    color: white !important;
+}
+
+/* Imagem específica para Cibersegurança */
+.header-cyber {
+    background-image: linear-gradient(rgba(10, 10, 10, 0.8), rgba(33, 37, 41, 0.9)), url('../img/fundo-cyber.jpg');
+    border-bottom-color: #00ffcc; /* Mantendo a linha verde neon do seu amigo */
+}
+
+/* Imagem específica para a IA */
+.header-ia {
+    background-image: linear-gradient(rgba(10, 10, 10, 0.8), rgba(33, 37, 41, 0.9)), url('../img/fundo-ia.jpg');
+    border-bottom-color: #9b59b6; /* Linha roxa */
+}
+
+/* Imagem específica para o FAQ */
+.header-faq {
+    background-image: linear-gradient(rgba(10, 10, 10, 0.8), rgba(33, 37, 41, 0.9)), url('../img/fundo-faq.jpg');
+}
+
+/* Imagem específica para o Formulário */
+.header-form {
+    background-image: linear-gradient(rgba(10, 10, 10, 0.8), rgba(33, 37, 41, 0.9)), url('../img/fundo-form.jpg');
+    border-bottom-color: #6c757d; /* Linha cinza */
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechAssist - Perguntas Frequentes (FAQ)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .faq-header {
+            background-color: #f8f9fa;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: #0d6efd;
+            color: white;
+        }
+        .accordion-button:not(.collapsed)::after {
+            filter: brightness(0) invert(1);
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">TechAssist</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ia.html">Diagnóstico IA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cyber.html">Cibersegurança</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header header-faq text-center">
+        <div class="container">
+            <h1 class="display-5 fw-bold text-dark">Como podemos ajudar?</h1>
+            <p class="lead text-muted">Respostas rápidas para as dúvidas mais comuns dos nossos clientes.</p>
+        </div>
+    </header>
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                
+                <div class="accordion shadow-sm" id="accordionFAQ">
+                    
+                    <div class="accordion-item border-0 border-bottom">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Como funciona o Diagnóstico por Inteligência Artificial?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionFAQ">
+                            <div class="accordion-body">
+                                O nosso Assistente Virtual interage consigo para entender os sintomas do seu equipamento. Com base num vasto banco de dados, ele gera um <strong>Laudo Técnico Preliminar</strong>. Este laudo não substitui a avaliação física, mas acelera consideravelmente o processo de reparação pela nossa equipa.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-0 border-bottom">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Fazem assistência remota ou apenas presencial?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionFAQ">
+                            <div class="accordion-body">
+                                Realizamos ambos! Problemas de software, otimização de sistema e remoção de vírus ligeiros podem ser resolvidos remotamente. Problemas de hardware (peças danificadas, computadores que não ligam) requerem envio para o nosso laboratório após preenchimento do formulário.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-0 border-bottom">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Como sei se preciso dos serviços de Cibersegurança?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionFAQ">
+                            <div class="accordion-body">
+                                Se o seu computador está excessivamente lento, se abriram janelas suspeitas, se ficheiros desapareceram ou se suspeita que as suas palavras-passe foram comprometidas, recomendamos aceder à nossa aba de <strong>Cibersegurança</strong> e solicitar uma Análise de Vulnerabilidade com o nosso especialista.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-0">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Qual é o prazo médio para receber um orçamento?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionFAQ">
+                            <div class="accordion-body">
+                                Após a abertura do chamado técnico através do nosso formulário, a nossa equipa analisa a solicitação e envia um orçamento detalhado num prazo máximo de <strong>24 a 48 horas úteis</strong>.
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <div class="text-center mt-5">
+                    <p class="text-muted">Ainda tem dúvidas?</p>
+                    <a href="formulario.html" class="btn btn-outline-primary">Fale com o Suporte Humano</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p class="mb-0">&copy; 2026 TechAssist. Projeto Académico.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .chatbot-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; font-size: 28px; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: transform 0.3s; }
+        .chatbot-btn:hover { transform: scale(1.1); }
+        .chatbot-window { display: none; position: fixed; bottom: 90px; right: 20px; width: 320px; background: white; border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden; border: 1px solid #dee2e6; }
+        .chatbot-header { background: #0d6efd; color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .chatbot-close { cursor: pointer; font-size: 18px; background: none; border: none; color: white; }
+        .chatbot-body { padding: 20px; height: 220px; background: #f8f9fa; }
+        .chat-bubble { background: #e9ecef; padding: 10px 15px; border-radius: 15px 15px 15px 0; font-size: 14px; margin-bottom: 15px; color: #333; }
+    </style>
+
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <span>🎧 Suporte TechAssist</span>
+            <button class="chatbot-close" onclick="toggleChatbot()">✖</button>
+        </div>
+        <div class="chatbot-body">
+            <div class="chat-bubble">
+                Olá! Sou o agente virtual da TechAssist. Como posso te guiar hoje?
+            </div>
+            <a href="ia.html" class="btn btn-sm btn-outline-primary mb-2 w-100 text-start">🤖 Fazer um Diagnóstico por IA</a>
+            <a href="faq.html" class="btn btn-sm btn-outline-primary mb-2 w-100 text-start">❓ Ver Dúvidas Frequentes</a>
+            <a href="formulario.html" class="btn btn-sm btn-primary w-100 text-start">👨‍🔧 Falar com Atendente Humano</a>
+        </div>
+    </div>
+
+    <button class="btn btn-primary chatbot-btn" onclick="toggleChatbot()">💬</button>
+
+    <script>
+        function toggleChatbot() {
+            const chatWindow = document.getElementById("chatbotWindow");
+            if (chatWindow.style.display === "none" || chatWindow.style.display === "") {
+                chatWindow.style.display = "block";
+            } else {
+                chatWindow.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

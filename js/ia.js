@@ -40,14 +40,17 @@ let step = 0;
 
                     // Monta o Laudo Final com o Botão de Copiar
                     botResponse = `Analisando os sintomas... ⏳<br><br>
-                    <strong>📋 LAUDO TÉCNICO PRELIMINAR:</strong><br>
+                        <strong>📋 LAUDO TÉCNICO PRELIMINAR:</strong><br>
                     <div id="textoLaudo" class="p-3 my-2 bg-white border rounded shadow-sm text-dark">
                         <strong>Aparelho:</strong> ${equipamentoUsuario.toUpperCase()}<br>
                         <strong>Sintoma relatado:</strong> ${messageText}<br>
                         <strong>Análise da IA:</strong> ${diagnostico}
                     </div>
-                    <button class="btn btn-sm btn-success mb-3" onclick="copiarLaudo()">📋 Copiar Laudo</button><br>
-                    Prontinho! Agora é só clicar no botão acima para copiar e colar lá no nosso formulário de <strong>Abrir Chamado</strong>.`;
+                    <div class="d-flex gap-2 mb-3 mt-2">
+                        <button class="btn btn-sm btn-success" onclick="copiarLaudo()">📋 1. Copiar Laudo</button>
+                        <a href="formulario.html" class="btn btn-sm btn-primary">🚀 2. Ir para o Formulário</a>
+                    </div>
+                        Prontinho! Copie o laudo e clique no botão azul para ir direto para o <strong>Formulário de Chamado</strong>.`;
                     
                     step++; //finaliza o fluxo
                 }
@@ -81,4 +84,5 @@ let step = 0;
                 alert("Erro ao copiar o laudo. Por favor, selecione o texto e copie manualmente.");
             });
         }
+        
         

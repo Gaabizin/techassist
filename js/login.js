@@ -1,4 +1,3 @@
-type="module"
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         // Importando as ferramentas de Senha e E-mail
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
@@ -20,29 +19,6 @@ type="module"
         const EMAIL_ADMIN = "gabrieldietrich98@gmail.com"; 
 
         const btnEntrar = document.getElementById("btnEntrar");
-        const btnCriar = document.getElementById("btnCriar");
-
-        // LÓGICA 1: CRIAR CONTA (CLIENTE OU ADMIN)
-        btnCriar.addEventListener("click", async () => {
-            const email = document.getElementById("emailLogin").value;
-            const senha = document.getElementById("senhaLogin").value;
-
-            if(!email || senha.length < 6) {
-                alert("Preencha o e-mail e use uma senha de pelo menos 6 caracteres.");
-                return;
-            }
-
-            try {
-                btnCriar.innerText = "Criando...";
-                await createUserWithEmailAndPassword(auth, email, senha);
-                alert("✅ Conta criada com sucesso! Faça o login agora.");
-                btnCriar.innerText = "Criar Nova Conta";
-            } catch (erro) {
-                console.error(erro);
-                alert("❌ Erro ao criar conta. Esse e-mail já pode estar em uso.");
-                btnCriar.innerText = "Criar Nova Conta";
-            }
-        });
 
         // LÓGICA 2: ENTRAR E VERIFICAR QUEM É
         btnEntrar.addEventListener("click", async () => {
